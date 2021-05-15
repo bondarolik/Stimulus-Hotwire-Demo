@@ -1,4 +1,21 @@
 <%= form_with model: address do |f| %>
+  <% if address.errors.any? %>
+    <div class="row">
+      <div class="col-12">
+        <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+          <div class="row no-glutters">
+            <div class="col-12 text-start">
+              <ul>
+                <% address.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
   <div class="mb-3">
     <%= f.label :title, "Título de dirección:", class: "form-label" %>
@@ -33,14 +50,12 @@
   <div class="row mb-3">
     <div class="col-6">
       <div class="form-floating">
-        <%= f.select :country,
+        <%= select_tag "country",
                       options_for_select(Country.order(:name).pluck(:name, :id)),
-                      { include_blank: true },
-                      {
-                        data: {},
-                        class: "form-control"
-                      } %>
-        <%= f.label :country, "País:" %>
+                      include_blank: true,
+                      data: {},
+                      class: "form-control" %>
+        <%= label_tag "country", "País:" %>
       </div>
     </div>
 
