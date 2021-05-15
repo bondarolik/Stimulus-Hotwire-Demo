@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: .8rem;  
+  min-height: 100vh;
+  overflow-x: hidden;  
+}

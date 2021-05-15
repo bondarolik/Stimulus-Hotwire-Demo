@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   get '/pages/selects', to: 'pages#selects', as: :pages_selects
   get '/pages/h_forms', to: 'pages#h_forms', as: :pages_h_forms
+
+  resources :addresses
 end

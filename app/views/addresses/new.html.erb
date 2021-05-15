@@ -1,0 +1,88 @@
+<div class="row bg-ocean py-4">
+  <h6 class="mb-3">Agregar nueva dirección:</h6>
+
+  <%= form_with(model: @address,
+                data: { },
+                  html: { class: "mb-4" }
+                ) do |f| %>
+    <% if address.errors.any? %>
+      <div class="row">
+        <div class="col-12">
+          <div class="alert alert-danger alert-dismissible fade show shadow" role="alert">
+            <ul>
+              <% address.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <div class="col-12 mb-3">
+        <%= f.label :street, Address.human_attribute_name(:street), class: "form-label mb-2" %>
+        <%= f.text_field :street, class: "form-control" %>          
+      </div>
+      
+      <div class="col-8">
+        <%= f.label :street_number, Address.human_attribute_name(:street_number), class: "form-label mb-2" %>
+        <%= f.text_field :street_number, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <div class="col-4">
+        <%= f.label :appt_floor, Address.human_attribute_name(:appt_floor), class: "form-label mb-2" %>
+        <%= f.text_field :appt_floor, class: "form-control" %>
+      </div>
+
+      <div class="col-4">
+        <%= f.label :appt_number, Address.human_attribute_name(:appt_number), class: "form-label mb-2" %>
+        <%= f.text_field :appt_number, class: "form-control" %>
+      </div>
+
+      <div class="col-4">
+        <%= f.label :zipcode, Address.human_attribute_name(:zipcode), class: "form-label mb-2" %>
+        <%= f.text_field :zipcode, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col-12 col-sm-6 mb-3">
+        <div class="form-floating">
+          <%= f.select :state_id,
+                        options_for_select(State.order(:name).pluck(:name, :id), @address.try(:state_id)),
+                        { include_blank: true },
+                        { 
+                          data: {  },
+                          class: "form-select"                      
+                        } %>
+          <%= f.label :state_id, "Selecciona una provincia" %>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6 mb-3">
+        <div class="form-floating">
+          <%= f.select :city_id,
+                        options_for_select(City.all.last(5).pluck(:name, :id), @address.try(:city_id)),
+                        { include_blank: true },
+                        { class: "form-select", disabled: false }%>
+          <%= f.label :city_id, "Selecciona una localidad" %>
+        </div>
+      </div>     
+    </div>
+
+
+    <div class="row mt-4">
+      <div class="col-6 text-start">
+        <%= link_to "Volver", pages_h_forms_path, class: "btn btn-sm btn-outline-secondary" %>
+      </div>
+
+      <div class="col-6 text-end">
+        <%= f.submit "Confirmar", class: "btn btn-primary" %>
+      </div>
+    </div>
+
+  <% end %>
+</div>
