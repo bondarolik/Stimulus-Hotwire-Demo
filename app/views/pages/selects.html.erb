@@ -7,7 +7,11 @@
         <%= select_tag "country",
                         options_for_select(Country.order(:name).pluck(:name, :id)),
                         include_blank: true,
-                        data: {},
+                        data: {
+                          controller: "regions",
+                          action: "change->regions#handleSelectChange",
+                          targetbox: "state"
+                        },
                         class: "form-select" %>
         <%= label_tag "country", "Selecciona un país" %>
       </div>
@@ -20,6 +24,7 @@
         <%= select_tag "state",
                         options_for_select(State.order(:name).pluck(:name, :id)),
                         include_blank: true,
+                        disabled: true,
                         data: {},
                         class: "form-select" %>
         <%= label_tag "state", "Selecciona un provincia" %>
