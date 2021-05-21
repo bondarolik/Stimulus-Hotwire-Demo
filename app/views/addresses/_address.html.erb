@@ -1,12 +1,12 @@
 <div class="card text-start">
   <div class="card-body">
-    <%= tag.h5 "Casa de Steve Jobs", class: "cart-title" %>
-    <%= tag.h6 "Calle 40, CP: 1879", class: "cart-subtitle mb-2 text-muted" %>
-    <%= tag.p "La Plata, Argentina", class: "card-text" %>
+    <%= tag.h5 address.title, class: "cart-title" %>
+    <%= tag.h6 "#{[address.street, address.street_number].join(", ")}, CP: #{address.zipcode}", class: "cart-subtitle mb-2 text-muted" %>
+    <%= tag.p [address.try(:state).try(:name), address.try(:country).try(:name)].join(", "), class: "card-text" %>
 
     <div class="text-end">
-      <%= link_to "Modificar", "", class: "card-link" %>
-      <%= link_to "Eliminar", "", class: "card-link" %>
+      <%= link_to "Modificar", edit_address_path(address), class: "card-link" %>
+      <%= link_to "Eliminar", address_path(address), method: :delete, data: { confirm: "Estas seguro que quieres eliminar esta dirección?" },  class: "card-link" %>
     </div>
   </div>
 </div>

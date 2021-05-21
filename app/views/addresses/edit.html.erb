@@ -1,14 +1,8 @@
 <h1 class="display-7 fw-bold mb-4">Hotwire en la practica</h1>
 
 <div class="row justify-content-evenly mt-5">
-  <div class="col-5">
-    <%= tag.h4 "Listado de direcciones agregadas", class: "text-start mb-5" %>
-
-    <%= render partial: "addresses/address" %>
-  </div>
-
   <div class="col-6 text-start">
-    <%= tag.h4 "Formulario de direcciones", class: "text-center mb-5" %>
+    <%= tag.h4 "Modificar dirección #{@address.title}", class: "text-center mb-5" %>
 
     <%= render partial: "addresses/form", locals: { address: @address } %>
   </div>

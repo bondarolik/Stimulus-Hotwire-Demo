@@ -47,7 +47,7 @@ class AddressesController < ApplicationController
 
   private
     def set_resource
-      @resource = Address.find(params[:id])
+      @address = Address.find(params[:id])
     end
 
     def resource_params
