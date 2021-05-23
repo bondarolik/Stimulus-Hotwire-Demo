@@ -2,9 +2,13 @@
 
 <div class="row justify-content-evenly mt-5">
   <div class="col-8 mx-auto">
-    <%= tag.h4 "Mis direcciones", class: "text-start mb-3" %>
+    <% if @address.present? %>
+      <%= tag.h4 "Mis direcciones", class: "text-start mb-3" %>
 
-    <%= render partial: "addresses/address", collection: @addresses %>
+      <%= render partial: "addresses/address", collection: @addresses %>
+    <% else %>
+      <p class="text-center text-warning">No hay direcciones registradas.</p>
+    <% end %>
 
     <div class="mt-5">
       <%= link_to "Agregar dirección", new_address_path, class: "btn btn-sm btn-dark" %>
