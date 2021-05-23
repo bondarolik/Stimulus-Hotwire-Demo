@@ -2,16 +2,16 @@
 
 <div class="row justify-content-evenly mt-5">
   <div class="col-8 mx-auto">
-    <% if @address.present? %>
-      <%= tag.h4 "Mis direcciones", class: "text-start mb-3" %>
-
-      <%= render partial: "addresses/address", collection: @addresses %>
-    <% else %>
-      <p class="text-center text-warning">No hay direcciones registradas.</p>
-    <% end %>
-
-    <div class="mt-5">
-      <%= link_to "Agregar dirección", new_address_path, class: "btn btn-sm btn-dark" %>
+    <div class="mb-5">
+      <%= turbo_frame_tag "new_address" do %>
+        <%= link_to "Agregar dirección", new_address_path, class: "btn btn-sm btn-dark" %>
+      <% end %>
     </div>
+
+    <%= tag.h4 "Mis direcciones", class: "text-start mb-3" unless @addresses.nil? %>
+
+    <%= turbo_frame_tag "addresses" do %>
+      <%= render partial: "addresses/address", collection: @addresses %>
+    <% end %>
   </div>
 </div>

@@ -16,8 +16,10 @@ class AddressesController < ApplicationController
   def create
     @address = Address.new(resource_params)
     if @address.save
-      flash[:notice] = "Dirección agregada correctamente"
-      redirect_to addresses_path
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to addresses_path, notice: "Dirección agregada correctamente" }
+      end
     else
       flash[:alert] = "Ocurrió un error al agregar la dirección"
       render :new
@@ -38,7 +40,10 @@ class AddressesController < ApplicationController
   def destroy
     if @address.destroy
       flash[:notice] = "Dirección eliminada!"
-      redirect_to addresses_path
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to addresses_path, notice: "Dirección agregada correctamente" }
+      end
     else
       flash[:error] =  "No se puede eliminar la dirreción"
       redirect_to addresses_path
